@@ -1,0 +1,45 @@
+# Compiled binaries
+lab[0-9]*
+a.out
+*.exe
+*.out
+*.app
+
+# Object files and libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.pdb
+*.ilk
+
+# Build directories
+build/
+bin/
+obj/
+out/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+
+# Debugging
+*.dSYM/
+core
+core.*
+vgcore.*
+
+# IDE and editor files
+.vscode/
+.idea/
+.vs/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
