@@ -158,15 +158,13 @@ void run() {
 namespace task3 {
 
 mutex mtx;
-condition_variable cv;
+condition_variable& cv = *new condition_variable();
 int i = 0;
 
 void ThreadN(int id) {
     unique_lock<mutex> lock(mtx);
     cout << "Thread" << id << ": waiting for a signal" << endl;
-    while (i != 1) {
-        cv.wait(lock);
-    }
+    cv.wait(lock, []() { return i == 1; });
     cout << "Message from thread " << id << endl;
 }
 
@@ -450,8 +448,11 @@ void run() {
     thread thr1(FirstThread, n, move(primeNPromise), move(startPromise), move(prime10NPromise));
     thread thr2(SecondThread, n, move(startFuture));
 
-    cout << "Prime number #" << n << ": " << primeNFuture.get() << endl;
-    cout << "Prime number #" << n * 10 << ": " << prime10NFuture.get() << endl;
+    long long primeN = primeNFuture.get();
+    cout << "Prime number #" << n << ": " << primeN << endl;
+
+    long long prime10N = prime10NFuture.get();
+    cout << "Prime number #" << n * 10 << ": " << prime10N << endl;
 
     thr1.join();
     thr2.join();
